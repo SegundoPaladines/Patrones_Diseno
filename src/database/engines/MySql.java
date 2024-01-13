@@ -1,5 +1,7 @@
 package database.engines;
 
+import models.Producto;
+
 public class MySql implements IDataBase{
     private static MySql connection;
     private MySql(){}
@@ -16,4 +18,11 @@ public class MySql implements IDataBase{
     public String getName(){
         return "MySql";
     }
+
+    @Override
+     public Producto [] getProductos(){
+        Producto productos [] = {};
+
+        return productos;
+     }
 }

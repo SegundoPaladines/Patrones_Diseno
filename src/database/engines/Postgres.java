@@ -1,5 +1,7 @@
 package database.engines;
 
+import models.Producto;
+
 public class Postgres implements IDataBase{
     private static Postgres connection;
     private Postgres(){}
@@ -14,5 +16,12 @@ public class Postgres implements IDataBase{
     @Override
     public String getName(){
         return "PostgreSQL";
+    }
+
+    @Override
+    public Producto [] getProductos(){
+        Producto productos [] = {};
+
+        return productos;
     }
 }

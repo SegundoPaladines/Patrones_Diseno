@@ -5,11 +5,9 @@ import database.engines.*;
 
 public class DBFactory {
     public static IDataBase DataBaseFactory(String engineName){
-        switch (engineName) {
-            case "MySql":
-                return MySql.getInstance();
-            default:
-                return Postgres.getInstance();
-        }
+        return switch (engineName) {
+            case "MySql" -> MySql.getInstance();
+            default -> Postgres.getInstance();
+        };
     }
 }
