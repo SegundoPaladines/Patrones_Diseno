@@ -37,6 +37,9 @@ public class Ventana extends javax.swing.JFrame {
         observable.addObserver(olbl_inventario);
         observable.addObserver(olbl_inventario);
         observable.addObserver(o_table);
+
+        //se notifica a todos los lementos que se inicializo
+        observable.notify_All("Inicializar");
     }
 
     private void initComponents() {

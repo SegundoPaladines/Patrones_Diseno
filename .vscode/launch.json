@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "Tema1_Taller1_e3ec46d8",
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}/lib/drivers/postgresql-42.7.1.jar"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Tema1_Taller1_e3ec46d8",
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}/lib/drivers/postgresql-42.7.1.jar"
+            ]
+        }
+    ]
+}

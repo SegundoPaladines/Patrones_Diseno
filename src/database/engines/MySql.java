@@ -1,4 +1,5 @@
 package database.engines;
+import java.util.ArrayList;
 
 import models.Producto;
 
@@ -20,9 +21,19 @@ public class MySql implements IDataBase{
     }
 
     @Override
-     public Producto [] getProductos(){
-        Producto productos [] = {};
+    public ArrayList<Producto> getProductos() {
+        ArrayList<Producto> productos = new ArrayList<Producto>();
 
         return productos;
-     }
+    }
+    @Override
+    public String addProducto(Producto producto){
+        try {
+
+            return "success";
+            
+        } catch (Exception e) {
+            return "error";
+        }
+    }
 }

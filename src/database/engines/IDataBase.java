@@ -1,8 +1,11 @@
 package database.engines;
 
+import java.util.ArrayList;
+
 import models.Producto;
 
 public interface IDataBase {
     public String getName();
-    public Producto [] getProductos();
+    public ArrayList<Producto> getProductos();
+    public String addProducto(Producto producto);
 }

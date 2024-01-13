@@ -4,13 +4,25 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
+import database.engines.IDataBase;
+import database.factories.DBFactory;
 import models.Producto;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class ProductController {
     private static ProductController productController;
     private ArrayList<Producto> productos;
+
+    private IDataBase postgres;
+    private IDataBase mySql;
+
     private ProductController(){
         this.productos = new ArrayList<Producto>();
+        this.postgres = DBFactory.DataBaseFactory("PostgreSQL");
+        this.mySql = DBFactory.DataBaseFactory("MySql");
+        getProductos();
     }
 
     public static ProductController getInstance (){
@@ -20,8 +32,24 @@ public class ProductController {
         return productController;
     }
 
+    private void getProductos() {
+        productos = new ArrayList<Producto>();
+        productos.addAll(postgres.getProductos());
+        productos.addAll(mySql.getProductos());
+    }
+
     public String agregarProducto(Producto producto){
-        this.productos.add(producto);
+        if(producto != null){
+            if(producto.valor_unitario > 100000){
+                String res = postgres.addProducto(producto);
+                if(res == "success"){
+                    this.getProductos();
+                }
+            }else{
+                System.out.println(mySql.getName());
+            }
+        }
+
         return "Agregado";
     }
 
@@ -53,12 +81,15 @@ public class ProductController {
     }
 
     public String getValorTotalInventario(){
-        float valorT = 0;
+        double valorT = 0;
 
         for (Producto producto : productos) {
             valorT += producto.valor_unitario*producto.cantidad;
         }
 
-        return "Valor Total Stock: " + valorT;
+        NumberFormat cop = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+        String res = cop.format(valorT);
+
+        return "Valor Total Stock: " + res;
     }
 }
