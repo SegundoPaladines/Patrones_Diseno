@@ -92,8 +92,11 @@ public class Postgres implements IDataBase {
                 int cantidad = resultSet.getInt("cantidad");
                 float valor_unitario = resultSet.getFloat("valor_unitario");
 
+                Producto p = new Producto(id, nombre, cantidad, valor_unitario);
+                p.bd = "PostgreSQL";
+                
                 // almacenar los productos
-                productos.add(new Producto(id, nombre, cantidad, valor_unitario));
+                productos.add(p);
             }
 
         } catch (SQLException e) {

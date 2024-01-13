@@ -5,6 +5,7 @@ public class Producto implements Cloneable{
     public String nombre;
     public int cantidad;
     public float valor_unitario;
+    public String bd;
 
     public Producto(int pk, String nombre, int cantidad, float valor_unitario){
         this.pk = pk;

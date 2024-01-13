@@ -87,7 +87,7 @@ public class Ventana extends javax.swing.JFrame {
 
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +119,7 @@ public class Ventana extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel_cantidad_productos)
@@ -156,6 +156,10 @@ public class Ventana extends javax.swing.JFrame {
         String cantidad = txtF_cantidad.getText();
         String valorUnitario = txtF_valor_unitario.getText();
         Producto p = new Producto(0, nombre, Integer.parseInt(cantidad), Float.parseFloat(valorUnitario));
+
+        txtF_nombre.setText("");
+        txtF_cantidad.setText("");
+        txtF_valor_unitario.setText("");
 
         observable.notify_All(productController.agregarProducto(p));
     }

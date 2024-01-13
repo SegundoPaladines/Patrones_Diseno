@@ -58,13 +58,18 @@ public class ProductController {
         // crear el modelo de la tabla
         modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("#");
+        modeloTabla.addColumn("pk");
+        modeloTabla.addColumn("DataBase");
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Cantidad");
         modeloTabla.addColumn("Valor Unitario");
 
         int contador = 1;
         for (Producto producto : productos) {
-            modeloTabla.addRow(new Object[]{contador, producto.nombre, producto.cantidad, "$ "+producto.valor_unitario});    
+            NumberFormat cop = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+            String res = cop.format(producto.valor_unitario);
+
+            modeloTabla.addRow(new Object[]{contador, producto.pk, producto.bd , producto.nombre, producto.cantidad, res});    
             contador++;
         }
 
