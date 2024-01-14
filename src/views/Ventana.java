@@ -227,9 +227,7 @@ public class Ventana extends javax.swing.JFrame {
         int pk = Integer.parseInt(pkSelected.toString());
         String db = dbSelected.toString();
 
-        System.out.println("ELIMINAR: Llave primaria: "+pk+" "+ " motor base de datos: "+db);
-
-        //observable.notify_All("editar");
+        observable.notify_All(productController.deleteProducto(pk, db));
     }
 
     // metodo que abre la ventana

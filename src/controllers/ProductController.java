@@ -56,6 +56,25 @@ public class ProductController {
         return "Agregado";
     }
 
+    public String deleteProducto(int pk, String db){
+        if(pk > 0){
+            if(db == "MySql"){
+                String res = mySql.deleteProducto(pk);
+                if(res == "success"){
+                    this.getProductos();
+                }
+            }
+            if(db == "PostgreSQL"){
+                String res = postgres.deleteProducto(pk);
+                if(res == "success"){
+                    this.getProductos();
+                }
+            }
+        }
+
+        return "Eliminado";
+    }
+
     public DefaultTableModel getTablaProductos(){
         DefaultTableModel modeloTabla = new DefaultTableModel();
         // crear el modelo de la tabla

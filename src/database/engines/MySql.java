@@ -130,4 +130,23 @@ public class MySql implements IDataBase{
             return "error: " + e.getMessage();
         }
     }
+
+    @Override
+    public String deleteProducto(int pk){
+        String query = "DELETE FROM productos WHERE id = ?";
+        //preparar la sentencia
+        try(PreparedStatement preparedStatement = dbConnection.prepareStatement(query)) {
+            preparedStatement.setInt(1, pk);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                return "success";
+            } else {
+                return "error: No se encontró el producto con el ID especificado.";
+            }
+        } catch (SQLException e) {
+            return "error: "+e.getMessage();
+        }
+    }
 }
