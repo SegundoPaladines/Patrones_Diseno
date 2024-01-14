@@ -182,4 +182,40 @@ public class MySql implements IDataBase{
             return null;
         }
     }
+
+    @Override
+    public String editProducto(int pk, String nombre, int cantidad, float valorUnitario) {
+        //la sentencia
+        String query = "UPDATE productos SET nombre=?, cantidad=?, valor_unitario=? WHERE id=?";
+        
+        //prerarar la ejecuacion
+        try (PreparedStatement preparedStatement = dbConnection.prepareStatement(query)) {
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setInt(2, cantidad);
+            preparedStatement.setFloat(3, valorUnitario);
+            preparedStatement.setInt(4, pk);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                return "success";
+            } else {
+                return "error: No se encontró el producto con el ID especificado.";
+            }
+        } catch (SQLException e) {
+            return "error: " + e.getMessage();
+        }
+    }
+
+    @Override
+    public void disconnect() {
+        if (dbConnection != null) {
+            try {
+                dbConnection.close();
+                System.out.println("Conexión cerrada.");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

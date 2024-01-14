@@ -109,12 +109,10 @@ public class ProductoForm extends JFrame{
                 e.printStackTrace();
             }
         }else{
-            
+            productController.editarProducto(producto.pk, producto.bd, nombre, cantidad, valorUnitario);
         }
 
-        //se supone que actualiza la tabla
         observable.notify_All(accion);
-
         dispose();
     }
 }

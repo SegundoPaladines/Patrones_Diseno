@@ -10,4 +10,6 @@ public interface IDataBase {
     public String addProducto(Producto producto);
     public String deleteProducto(int pk);
     public Producto getProducto(int pk);
+    public String editProducto(int pk, String nombre, int cantidad, float valorUnitario);
+    public void  disconnect();
 }

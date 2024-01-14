@@ -131,4 +131,25 @@ public class ProductController {
 
         return null;
     }
+
+    public String editarProducto(int pk, String database, String nombre, int cantidad, float valorUnitario) {
+        String res = "DB error";
+        if(database.equalsIgnoreCase("Mysql")){
+            res = mySql.editProducto(pk, nombre, cantidad, valorUnitario);
+        }
+        if(database.equalsIgnoreCase("PostgreSQL")){
+            res = postgres.editProducto(pk, nombre, cantidad, valorUnitario);
+        }
+
+        if(res == "success"){
+            this.getProductos();
+        }
+
+        return "Editado ";
+    }
+
+    public void clearConections(){
+        mySql.disconnect();
+        postgres.disconnect();
+    }
 }
