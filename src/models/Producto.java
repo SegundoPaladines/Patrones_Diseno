@@ -14,6 +14,10 @@ public class Producto implements Cloneable{
         this.valor_unitario = valor_unitario;
     }
 
+    public Producto clonarProducto() throws CloneNotSupportedException{
+        return (Producto)this.clone();
+    }
+
     @Override
     protected Object clone() throws CloneNotSupportedException{
         return super.clone();

@@ -120,4 +120,15 @@ public class ProductController {
 
         return "Valor Total Stock: " + res;
     }
+
+    public Producto getProducto(int pk, String database){
+        if(database.equalsIgnoreCase("Mysql")){
+            return mySql.getProducto(pk);
+        }
+        if(database.equalsIgnoreCase("PostgreSQL")){
+            return postgres.getProducto(pk);
+        }
+
+        return null;
+    }
 }

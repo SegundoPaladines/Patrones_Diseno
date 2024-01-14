@@ -144,4 +144,37 @@ public class Postgres implements IDataBase {
             return "error: "+e.getMessage();
         }
     }
+
+    @Override
+    public Producto getProducto(int pk){
+
+        //preparar la sentencia
+        String query = "SELECT * FROM productos WHERE id = ?";
+
+        //se hace la consulta. el try asegura el control del error       
+        try(PreparedStatement preparedStatement = dbConnection.prepareStatement(query)) {
+            preparedStatement.setInt(1, pk);
+
+            // ejecutar la consulta y recoger los resultados
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String nombre = resultSet.getString("nombre");
+                    int cantidad = resultSet.getInt("cantidad");
+                    float valor_unitario = resultSet.getFloat("valor_unitario");
+
+                    Producto p = new Producto(id, nombre, cantidad, valor_unitario);
+                    p.bd = "PostgreSQL";
+
+                    return p;
+                } else {
+                    // no hay nada
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

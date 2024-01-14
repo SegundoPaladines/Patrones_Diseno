@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ProductoForm",
+            "request": "launch",
+            "mainClass": "views.ProductoForm",
+            "projectName": "Tema1_Taller1_e3ec46d8"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",

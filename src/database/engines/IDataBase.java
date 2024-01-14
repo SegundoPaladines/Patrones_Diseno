@@ -9,4 +9,5 @@ public interface IDataBase {
     public ArrayList<Producto> getProductos();
     public String addProducto(Producto producto);
     public String deleteProducto(int pk);
+    public Producto getProducto(int pk);
 }

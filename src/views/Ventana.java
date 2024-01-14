@@ -203,7 +203,8 @@ public class Ventana extends javax.swing.JFrame {
 
         System.out.println("EDITAR: Llave primaria: "+pk+" "+ " motor base de datos: "+db);
 
-        //observable.notify_All("editar");
+        ProductoForm form = new ProductoForm(pk, db, "Editar", observable);
+        form.mostrarForm();
     }
 
     private void btn_clonarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,8 +216,8 @@ public class Ventana extends javax.swing.JFrame {
         String db = dbSelected.toString();
 
         System.out.println("CLONAR: Llave primaria: "+pk+" "+ " motor base de datos: "+db);
-
-        //observable.notify_All("editar");
+        ProductoForm form = new ProductoForm(pk, db, "Clonar", observable);
+        form.mostrarForm();
     }
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {
