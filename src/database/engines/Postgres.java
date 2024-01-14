@@ -57,8 +57,11 @@ public class Postgres implements IDataBase {
     
                 Statement createStatement = dbConnection.createStatement();
                 createStatement.executeUpdate(createTableQuery);
+                
+                System.out.println("Tabla 'productos' creada.");
+            } else {
+                System.out.println("La tabla 'productos' ya existe.");
             }
-    
             // cerrar los recursos
             checkResultSet.close();
             checkStatement.close();

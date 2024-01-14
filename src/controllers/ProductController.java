@@ -46,7 +46,10 @@ public class ProductController {
                     this.getProductos();
                 }
             }else{
-                System.out.println(mySql.getName());
+                String res = mySql.addProducto(producto);
+                if(res == "success"){
+                    this.getProductos();
+                }
             }
         }
 
@@ -75,6 +78,7 @@ public class ProductController {
 
         return modeloTabla;
     }
+    
     public String getTotalProductos(){
         int cantidad = 0;
 
