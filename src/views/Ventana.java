@@ -68,7 +68,7 @@ public class Ventana extends javax.swing.JFrame {
         txtF_valor_unitario = new JTextField();
 
         // cuando se cierre la ventana
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(cerrarVentana());
 
         // el text field
         txtF_inventario.setEditable(false);
@@ -257,6 +257,11 @@ public class Ventana extends javax.swing.JFrame {
         });
     }
 
+    public int cerrarVentana(){
+        //ProductController.getInstance().clearConections();
+
+        return javax.swing.WindowConstants.EXIT_ON_CLOSE;
+    }
     // variables globales
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_editar;
