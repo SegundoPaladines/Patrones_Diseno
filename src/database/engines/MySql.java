@@ -51,12 +51,12 @@ public class MySql implements IDataBase{
     private void checkTables() {
         try {
             // SQL para verificar si existe la tabla
-            String query= "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'productos')";
+            String query= "SHOW TABLES LIKE 'productos'";
 
             try (Statement checkStatement = dbConnection.createStatement();
                 ResultSet checkResultSet = checkStatement.executeQuery(query)) {
 
-                if (checkResultSet.next() && !checkResultSet.getBoolean(1)) {
+                if (!checkResultSet.next()) {
                     // sql para crear la tabla
                     String createTable = "CREATE TABLE productos (id SERIAL PRIMARY KEY, nombre VARCHAR(250), cantidad INT, valor_unitario FLOAT)";
 
