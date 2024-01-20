@@ -92,28 +92,49 @@ public class ProductoForm extends JFrame{
     private void guardarDatos(){
         /* VALIDAR CAMPOS TIPO DE DATO Y QUE NO SEAN VACIOS */
         String nombre = txtNombre.getText();
-        int cantidad = Integer.parseInt(txtCantidad.getText());
-        float valorUnitario = Float.parseFloat(txtValorUnitario.getText());
 
-        if(accion.equalsIgnoreCase("Clonar")){
+        if(!nombre.equalsIgnoreCase("")){
             try {
-                Producto clonedP = this.producto.clonarProducto();
-                if(clonedP!=null){
-                    clonedP.nombre = nombre;
-                    clonedP.cantidad = cantidad;
-                    clonedP.valor_unitario = valorUnitario;
-
-                    productController.agregarProducto(clonedP);
-                }
+                Integer.parseInt(txtCantidad.getText());
             } catch (Exception e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        }else{
-            productController.editarProducto(producto.pk, producto.bd, nombre, cantidad, valorUnitario);
-        }
+    
+            try {
+                Float.parseFloat(txtValorUnitario.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "El valor unitario debe ser un número.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        observable.notify_All(accion);
-        dispose();
+            int cantidad = Integer.parseInt(txtCantidad.getText());
+            float valorUnitario = Float.parseFloat(txtValorUnitario.getText());
+    
+            if(accion.equalsIgnoreCase("Clonar")){
+                try {
+                    Producto clonedP = this.producto.clonarProducto();
+                    if(clonedP!=null){
+                        clonedP.nombre = nombre;
+                        clonedP.cantidad = cantidad;
+                        clonedP.valor_unitario = valorUnitario;
+    
+                        productController.agregarProducto(clonedP);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                productController.editarProducto(producto.pk, producto.bd, nombre, cantidad, valorUnitario);
+            }
+    
+            observable.notify_All(accion);
+            dispose();
+
+            JOptionPane.showMessageDialog(this, "Acción realizada con exito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this, "El nombre no puede ser vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
 

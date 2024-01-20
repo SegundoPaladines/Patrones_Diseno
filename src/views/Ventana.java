@@ -184,51 +184,86 @@ public class Ventana extends javax.swing.JFrame {
         String nombre = txtF_nombre.getText();
         String cantidad = txtF_cantidad.getText();
         String valorUnitario = txtF_valor_unitario.getText();
-        Producto p = new Producto(0, nombre, Integer.parseInt(cantidad), Float.parseFloat(valorUnitario));
 
-        txtF_nombre.setText("");
-        txtF_cantidad.setText("");
-        txtF_valor_unitario.setText("");
+        if(nombre != "" && cantidad != "" && valorUnitario != ""){
 
-        observable.notify_All(productController.agregarProducto(p));
+            try {
+                Integer.parseInt(cantidad);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                Float.parseFloat(valorUnitario);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "El valor unitario debe ser un número.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Producto p = new Producto(0, nombre, Integer.parseInt(cantidad), Float.parseFloat(valorUnitario));
+            txtF_nombre.setText("");
+            txtF_cantidad.setText("");
+            txtF_valor_unitario.setText("");
+
+            observable.notify_All(productController.agregarProducto(p));
+
+            JOptionPane.showMessageDialog(this, "Producto agregado con exito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {
         /* VALIDAR CAMPOS TIPO DE DATO Y QUE NO SEAN VACIOS */
-        Object pkSelected = tabla.getValueAt(tabla.getSelectedRow(), 1);
-        Object dbSelected = tabla.getValueAt(tabla.getSelectedRow(), 2);
+        try {
+            Object pkSelected = tabla.getValueAt(tabla.getSelectedRow(), 1);
+            Object dbSelected = tabla.getValueAt(tabla.getSelectedRow(), 2);
+            int pk = Integer.parseInt(pkSelected.toString());
+            String db = dbSelected.toString();
 
-        int pk = Integer.parseInt(pkSelected.toString());
-        String db = dbSelected.toString();
+            System.out.println("EDITAR: Llave primaria: "+pk+" "+ " motor base de datos: "+db);
 
-        System.out.println("EDITAR: Llave primaria: "+pk+" "+ " motor base de datos: "+db);
-
-        ProductoForm form = new ProductoForm(pk, db, "Editar", observable);
-        form.mostrarForm();
+            ProductoForm form = new ProductoForm(pk, db, "Editar", observable);
+            form.mostrarForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void btn_clonarActionPerformed(java.awt.event.ActionEvent evt) {
         /* VALIDAR CAMPOS TIPO DE DATO Y QUE NO SEAN VACIOS */
-        Object pkSelected = tabla.getValueAt(tabla.getSelectedRow(), 1);
-        Object dbSelected = tabla.getValueAt(tabla.getSelectedRow(), 2);
+        try {
+            Object pkSelected = tabla.getValueAt(tabla.getSelectedRow(), 1);
+            Object dbSelected = tabla.getValueAt(tabla.getSelectedRow(), 2);
 
-        int pk = Integer.parseInt(pkSelected.toString());
-        String db = dbSelected.toString();
+            int pk = Integer.parseInt(pkSelected.toString());
+            String db = dbSelected.toString();
 
-        System.out.println("CLONAR: Llave primaria: "+pk+" "+ " motor base de datos: "+db);
-        ProductoForm form = new ProductoForm(pk, db, "Clonar", observable);
-        form.mostrarForm();
+            System.out.println("CLONAR: Llave primaria: "+pk+" "+ " motor base de datos: "+db);
+            ProductoForm form = new ProductoForm(pk, db, "Clonar", observable);
+            form.mostrarForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {
         /* VALIDAR CAMPOS TIPO DE DATO Y QUE NO SEAN VACIOS */
-        Object pkSelected = tabla.getValueAt(tabla.getSelectedRow(), 1);
-        Object dbSelected = tabla.getValueAt(tabla.getSelectedRow(), 2);
+        try {
+            Object pkSelected = tabla.getValueAt(tabla.getSelectedRow(), 1);
+            Object dbSelected = tabla.getValueAt(tabla.getSelectedRow(), 2);
 
-        int pk = Integer.parseInt(pkSelected.toString());
-        String db = dbSelected.toString();
+            int pk = Integer.parseInt(pkSelected.toString());
+            String db = dbSelected.toString();
 
-        observable.notify_All(productController.deleteProducto(pk, db));
+            observable.notify_All(productController.deleteProducto(pk, db));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // metodo que abre la ventana
